@@ -2,17 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Scrollbar Styling for the Vault */
-::-webkit-scrollbar {
-  width: 8px;
+body {
+  background-color: #000;
+  overflow: hidden; /* Prevents scrollbars during animation */
 }
-::-webkit-scrollbar-track {
-  background: #0a0a0a; 
+
+/* --- THE CRT SHUTDOWN EFFECT --- */
+@keyframes turn-off {
+  0% {
+    transform: scale(1, 1.3) translate3d(0, 0, 0);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1, 0.001) translate3d(0, 0, 0);
+    filter: brightness(10);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: scale(0, 0.001) translate3d(0, 0, 0);
+    opacity: 0;
+  }
 }
-::-webkit-scrollbar-thumb {
-  background: #333; 
-  border-radius: 4px;
+
+.animate-crt-off {
+  animation: turn-off 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  animation-fill-mode: forwards;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b; /* Amber color on hover */
-}
+
+/* Custom Scrollbars (Keep your existing ones for each app below this line) */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; } 
+
+
